@@ -1,0 +1,48 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    width: 100vw;
+}
+
+.green-icon {
+    color: #1b990b;
+}
+
+.orange-icon {
+    color: #e27c23;
+}
+
+.red-icon {
+    color: #c10c12;
+}
+
+
+.myDivIcon {
+    text-align: center;
+    /* Horizontally center the text (icon) */
+    line-height: 20px;
+    /* Vertically center the text (icon)
+    background-color:rgb(146, 22, 22); // set a background color
+    color: green; */
+  }
+
+  #map{
+    display:block;
+    /* height:800px; */
+}
+
+.popup {
+    margin: 0;
+}
+
+.popup img{
+    max-width: 100%;
+    height: auto;
+}
+
+.leaflet-popup-content p {
+    margin: 0;
+}
