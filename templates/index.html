@@ -66,8 +66,13 @@
       result = '<div class="popup">';
       result = result + '<img src="' + asset['imageLink'][0] + '"/>';
       result = result + '<h1>' + asset['shortName'] + '</h1>';
-      result = result + '<h2>Owned amount: ' + (asset['ownedAmount'] * asset['tokenPrice']).toFixed(2).toLocaleString() +' ' + asset['currency'] + '</h2>';
-      result = result + '<p>Token: ' + asset['ownedAmount'] + ' / ' + asset['totalTokens'] + '</p>';
+      if (asset['productType'] == 'equity_token') {
+        result = result + '<h2>Owned amount: ' + ((asset['ownedAmount']/1e-9) * asset['tokenPrice']).toFixed(2).toLocaleString() +' ' + asset['currency'] + '</h2>';
+        result = result + '<p>Token: ' + asset['ownedAmount']/1e-9 + ' / ' + asset['totalTokens'] + '</p>';
+      } else {
+        result = result + '<h2>Owned amount: ' + (asset['ownedAmount'] * asset['tokenPrice']).toFixed(2).toLocaleString() +' ' + asset['currency'] + '</h2>';
+        result = result + '<p>Token: ' + asset['ownedAmount'] + ' / ' + asset['totalTokens'] + '</p>';
+      }
       result = result + '<p>Rendement: ' + asset['annualPercentageYield'].toFixed(2) + ' %</p>';
       result = result + '<p>Weekly rent: ' +  (asset['netRentDayPerToken'] * 7 * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
       result = result + '<p>Yearly rent: ' +  (asset['netRentYearPerToken'] * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
