@@ -73,7 +73,7 @@
         result = result + '<h2>Owned amount: ' + (asset['ownedAmount'] * asset['tokenPrice']).toFixed(2).toLocaleString() +' ' + asset['currency'] + '</h2>';
         result = result + '<p>Token: ' + asset['ownedAmount'] + ' / ' + asset['totalTokens'] + '</p>';
       }
-      result = result + '<p>Rendement: ' + asset['annualPercentageYield'].toFixed(2) + ' %</p>';
+      result = result + '<p>Yield: ' + asset['annualPercentageYield'].toFixed(2) + ' %</p>';
       result = result + '<p>Weekly rent: ' +  (asset['netRentDayPerToken'] * 7 * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
       result = result + '<p>Yearly rent: ' +  (asset['netRentYearPerToken'] * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
       if (asset['rentedUnits'] != 0) {
