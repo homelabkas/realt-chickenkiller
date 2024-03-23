@@ -120,13 +120,12 @@ def validateWallets(wallet1, wallet2):
 
 
 def cleanUpProperties(propertyList):
-
-
     # update gps coordinate of RWA Holding SA. Incorrect GPS data in realt API
     #RWA Holdings SA : contract : 0x0675e8F4A52eA6c845CB6427Af03616a2af42170
     #46.99035403396675, 6.927240186277815
-    propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lat'] = 46.99035403396675
-    propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lng'] = 6.927240186277815
+    if propertyList.get('0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()) is not None:
+        propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lat'] = 46.99035403396675
+        propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lng'] = 6.927240186277815
 
     return propertyList
 
