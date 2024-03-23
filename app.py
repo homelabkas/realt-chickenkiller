@@ -5,7 +5,6 @@ import requests, json
 
     
 def getRmmV3Balance(walletAddressList):
-    #dataRequest = {"operationName":"RealTokenQuery","variables":{"addressList":[""]},"query":"query RealTokenQuery($addressList: [String]!) {\n  accounts(where: {address_in: $addressList}) {\n    address\n    balances(\n      where: {amount_gt: \"0\"}\n      first: 1000\n      orderBy: amount\n      orderDirection: desc\n    ) {\n      token {\n        address\n        }\n      amount\n      }\n    }\n}"}
     dataRequest = {"operationName":"RmmQuery","variables":{"addressList":[]},"query":"query RmmQuery($addressList: [String]!) {\n  users(where: {id_in: $addressList}) {\n    id\n    balances {\n      token {\n        name\n        address\n        decimals\n        __typename\n      }\n      amount\n      __typename\n    }\n    __typename\n  }\n}"}
     dataRequest['variables']['addressList'] = walletAddressList
     header = {'Content-Type':'application/json'}
@@ -45,7 +44,6 @@ def getGnosisBalance_v2(walletAddressList):
             result = []
             balanceData = json.loads(r.content)['data']['accounts']
             for adresses in balanceData:
-                #print(adresses)
                 for item in  adresses['balances']:
                     token = item['token']
                     token['wallet'] = adresses['address']
@@ -153,13 +151,11 @@ def displayWalletContent(walletList):
                     addProperty['ownedAmount'] = float(addProperty['ownedAmount']) + float(gnosisAsset['amount'])
                     addPropertyDict = {gnosisAsset['address'].lower(): addProperty}
                     ownedPropertiesDict.update(addPropertyDict)
-                    #print(f"dico: {addPropertyDict}")                    
                 else:                
                     addProperty = realTassets[gnosisAsset['address']]
                     addProperty['ownedAmount'] = float(gnosisAsset['amount'])
                     addPropertyDict = {gnosisAsset['address'].lower(): addProperty}
                     ownedPropertiesDict.update(addPropertyDict)
-                    #ownedProperties.append(addProperty)
             except:
                 print(f"Asset not found: {gnosisAsset}")
                 traceback.print_exc()
@@ -200,7 +196,6 @@ def displayWalletContent(walletList):
 
 
 app=Flask(__name__)
-# font_awesome = FontAwesome(app)
 
 @app.route('/', methods=["GET", "POST"])
 async def main():
@@ -230,11 +225,3 @@ if __name__ == '__main__':
 
     http_server = WSGIServer(('', 8080), app)
     http_server.serve_forever()
-
-# test = ['0xe9781b45ca66a0ff543b36c13eec620c0c56380b', '0xccb02e7cbfa20f05391190b219cfdd84a7688d47']
-# test = ['0xccb02e7cbfa20f05391190b219cfdd84a7688d47']
-# a = displayWalletContent(test)
-
-# for item in getGnosisBalance_v2(test):
-#     if item['address'] == '0xc38e84bcc2d2693dd77d89f2b86a83e7fe98afa5':
-#         print(item)
