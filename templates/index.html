@@ -71,7 +71,9 @@
       result = result + '<p>Rendement: ' + asset['annualPercentageYield'].toFixed(2) + ' %</p>';
       result = result + '<p>Weekly rent: ' +  (asset['netRentDayPerToken'] * 7 * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
       result = result + '<p>Yearly rent: ' +  (asset['netRentYearPerToken'] * asset['ownedAmount']).toFixed(2) + ' ' + asset['currency'] + '</p>';
-      result = result + '<p>Rented unit: ' +  asset['rentedUnits'] + ' / ' + asset['totalUnits'] + ' (' + (asset['rentedUnits'] * 100 / asset['totalUnits']).toFixed(2) + ' %)' +  '</p>';
+      if (asset['rentedUnits'] != 0) {
+        result = result + '<p>Rented unit: ' +  asset['rentedUnits'] + ' / ' + asset['totalUnits'] + ' (' + (asset['rentedUnits'] * 100 / asset['totalUnits']).toFixed(2) + ' %)' +  '</p>';
+      }
       result = result + '<p>Asset price: ' + asset['totalInvestment'].toLocaleString() + ' ' + asset['currency'] + '</p>';
       result = result + '<p><a href="' +  asset['marketplaceLink'] + '">' + asset['fullName'] + '</a></p>'; // marker['marketplaceLink']
       result = result + '</div>';

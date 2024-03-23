@@ -121,6 +121,17 @@ def validateWallets(wallet1, wallet2):
     return walletList
 
 
+def cleanUpProperties(propertyList):
+
+
+    # update gps coordinate of RWA Holding SA. Incorrect GPS data in realt API
+    #RWA Holdings SA : contract : 0x0675e8F4A52eA6c845CB6427Af03616a2af42170
+    #46.99035403396675, 6.927240186277815
+    propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lat'] = 46.99035403396675
+    propertyList['0x0675e8F4A52eA6c845CB6427Af03616a2af42170'.lower()]['coordinate']['lng'] = 6.927240186277815
+
+    return propertyList
+
 def displayWalletContent(walletList):
     #get list of realt properties
     realTassets = getPropertiesList()
@@ -181,7 +192,10 @@ def displayWalletContent(walletList):
         #No wallet provided. Display the whole realt portfolio
         ownedPropertiesDict = realTassets
     
+
+    ownedPropertiesDict = cleanUpProperties(ownedPropertiesDict)
     print(f"Total unique properties : {len(ownedPropertiesDict.values())}")
+    
     return ownedPropertiesDict.values()
 
 
